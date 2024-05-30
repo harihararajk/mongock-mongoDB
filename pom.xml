@@ -15,7 +15,6 @@
 	<description>Demo project for Mongock with mongoDB</description>
 	<properties>
 		<java.version>17</java.version>
-		<couchbase-java-client.version>3.5.1</couchbase-java-client.version>
 		<mongock-version>5.4.2</mongock-version>
 	</properties>
 	<dependencies>
@@ -24,11 +23,21 @@
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 			<version>3.3.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.mongock</groupId>
+			<artifactId>mongock-springboot-v3</artifactId>
+			<version>${mongock-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.mongock</groupId>
+			<artifactId>mongodb-springdata-v4-driver</artifactId>
+			<version>${mongock-version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -39,18 +48,6 @@
 			<artifactId>lombok</artifactId>
 			<version>LATEST</version>  <scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>io.mongock</groupId>
-			<artifactId>mongock-springboot-v3</artifactId>
-			<version>${mongock-version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.mongock</groupId>
-			<artifactId>mongodb-springdata-v4-driver</artifactId>
-			<version>${mongock-version}</version>
-		</dependency>
-
 	</dependencies>
 
 	<build>
