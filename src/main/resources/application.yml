@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: mongock
+  data:
+    mongodb:
+      uri: mongodb://root:password@localhost:27017/?retryWrites=false
+      database: store
+
+mongock:
+  transactionEnabled: false
+  enabled: true
+  index-creation: true
+  migration-scan-package: com.tw.mongock.migration
