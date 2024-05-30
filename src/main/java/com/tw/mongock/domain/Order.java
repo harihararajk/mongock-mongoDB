@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document(collection = "orders")
 @Getter
 @Builder
@@ -15,8 +17,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Order {
     @Id
     private String id;
-    private String name;
-    private Integer quantity;
-    private Double cost;
+    private String customerName;
+    private List<OrderItem> items;
 
 }

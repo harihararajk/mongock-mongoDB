@@ -2,16 +2,18 @@ package com.tw.mongock.migration;
 
 import com.tw.mongock.MongockApplication;
 import com.tw.mongock.domain.Order;
+import com.tw.mongock.domain.OrderItem;
 import com.tw.mongock.repository.OrderRepository;
 import io.mongock.api.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
+import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-@ChangeUnit(id="client-initializer", order = "1", author = "mongock-execution")
+@ChangeUnit(id = "client-initializer", order = "1", author = "mongock-execution")
 @Slf4j
 public class InitialChangeUnit {
 
@@ -34,7 +36,7 @@ public class InitialChangeUnit {
 
         orderRepository.saveAll(
                 IntStream.range(0, INITIAL_CLIENTS)
-                        .mapToObj(InitialChangeUnit::getRandomOrder)
+                        .mapToObj(i -> getRandomOrder(String.valueOf(i)))
                         .collect(Collectors.toList())
         );
     }
@@ -46,8 +48,9 @@ public class InitialChangeUnit {
         orderRepository.deleteAll();
     }
 
-    private static Order getRandomOrder(int i) {
+    private static Order getRandomOrder(String i) {
         Random random = new Random();
-        return  Order.builder().id(String.valueOf(i)).name("name-"+i).quantity(random.nextInt()).cost(random.nextDouble()).build();
+        var item = OrderItem.builder().id(i).totalCost(random.nextDouble()).quantity(1).build();
+        return Order.builder().id(i).customerName("name-" + i).items(List.of(item)).build();
     }
 }
