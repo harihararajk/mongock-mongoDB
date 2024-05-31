@@ -13,11 +13,9 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-@ChangeUnit(id = "client-initializer", order = "1", author = "mongock-execution")
+@ChangeUnit(id = "initial changeUnit", order = "1", author = "mongock-mongodb-demo")
 @Slf4j
 public class InitialChangeUnit {
-
-    public final static int INITIAL_CLIENTS = 10;
 
     @BeforeExecution
     public void beforeExecution(MongoTemplate mongoTemplate) {
@@ -33,9 +31,8 @@ public class InitialChangeUnit {
 
     @Execution
     public void execution(OrderRepository orderRepository) {
-
         orderRepository.saveAll(
-                IntStream.range(0, INITIAL_CLIENTS)
+                IntStream.range(0, 10)
                         .mapToObj(i -> getRandomOrder(String.valueOf(i)))
                         .collect(Collectors.toList())
         );
@@ -44,7 +41,6 @@ public class InitialChangeUnit {
     @RollbackExecution
     public void rollbackExecution(OrderRepository orderRepository) {
         log.info("rollback of execution");
-
         orderRepository.deleteAll();
     }
 
